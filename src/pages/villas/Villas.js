@@ -71,13 +71,9 @@ const Villas = () => {
                                 <th>No</th>
                                 <th>Name</th>
                                 <th>Location</th>
-                                <th>Description</th>
                                 <th>Price</th>
-                                <th>Map</th>
-                                <th>Phone</th>
-                                <th>Bedroom</th>
-                                <th>Bathroom</th>
-                                <th>Swimming Pool</th>
+                                <th>Total Galleries</th>
+                                <th>Rating</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -87,14 +83,10 @@ const Villas = () => {
                                     const {
                                         id,
                                         name,
-                                        description,
                                         price,
-                                        map_url,
-                                        phone,
-                                        bedroom,
-                                        bathroom,
-                                        swimming_pool,
                                         Location,
+                                        VillaGalleries,
+                                        averageRating,
                                     } = item;
 
                                     return (
@@ -103,37 +95,15 @@ const Villas = () => {
                                             <td>{name}</td>
                                             <td>{Location.name}</td>
                                             <td>
-                                                <span
-                                                    className="d-inline-block text-truncate"
-                                                    style={{
-                                                        maxWidth: "150px",
-                                                    }}
-                                                >
-                                                    {description}
-                                                </span>
-                                            </td>
-                                            <td>
                                                 <MoneyFormat
                                                     price={price}
                                                 ></MoneyFormat>
                                             </td>
+                                            <td>{VillaGalleries.length}</td>
                                             <td>
-                                                <a
-                                                    href={map_url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="green-color"
-                                                >
-                                                    Link
-                                                </a>
-                                            </td>
-                                            <td>+62 {phone}</td>
-                                            <td>{bedroom}</td>
-                                            <td>{bathroom}</td>
-                                            <td>
-                                                {swimming_pool
-                                                    ? "Available"
-                                                    : "Unavailable"}
+                                                {averageRating
+                                                    ? averageRating
+                                                    : "No Review Yet"}
                                             </td>
                                             <td>
                                                 <Link

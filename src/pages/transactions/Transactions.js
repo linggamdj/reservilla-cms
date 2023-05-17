@@ -1,38 +1,22 @@
 import React, { useState, useEffect } from "react";
 import EmptyRow from "../../helpers/EmptyRow";
-import { getUsers } from "../../axios/userAxios";
+import { getTransactions } from "../../axios/transactionAxios";
 import { Link } from "react-router-dom";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import Pagination from "../../components/Pagination";
-import Select from "react-select";
 
 const Transactions = () => {
     const [transactions, setTransactions] = useState([]);
-    const [users, setUsers] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 5;
 
-    let userOptions = [];
-
     useEffect(() => {
-        // getTransactions((result) => setTransactions(result));
-        getUsers((result) => setUsers(result));
+        getTransactions((result) => setTransactions(result));
     }, []);
-
-    users?.map((user) => {
-        userOptions.push({
-            value: user.id,
-            label: user.username,
-        });
-
-        return user;
-    });
 
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentPosts = transactions.slice(firstPostIndex, lastPostIndex);
-
-    const deleteHandler = () => {};
 
     return (
         <>
@@ -66,14 +50,36 @@ const Transactions = () => {
                                 <th>No</th>
                                 <th>Transaction Id</th>
                                 <th>Name</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody className="align-middle">
-                            <EmptyRow
-                                name={"Transactions"}
-                                col={"5"}
-                            ></EmptyRow>
+                            {currentPosts.length > 0 ? (
+                                currentPosts.map((transaction, index) => {
+                                    const { id, User, status } = transaction;
+
+                                    return (
+                                        <tr key={id}>
+                                            <td>{index + 1}</td>
+                                            <td>{id}</td>
+                                            <td>{User.name}</td>
+                                            <td>
+                                                {status
+                                                    .charAt(0)
+                                                    .toUpperCase() +
+                                                    status.slice(1)}
+                                            </td>
+                                            <td>Detail</td>
+                                        </tr>
+                                    );
+                                })
+                            ) : (
+                                <EmptyRow
+                                    name={"Transactions"}
+                                    col={"10"}
+                                ></EmptyRow>
+                            )}
                         </tbody>
                     </table>
                 </section>

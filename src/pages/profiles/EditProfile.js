@@ -24,9 +24,8 @@ const EditProfile = () => {
                 password: result.password,
                 "profile-picture": result.profile_picture,
             });
-            // getCategories((result) => setCategories(result));
         });
-    }, []);
+    }, [id]);
 
     const submitHandler = () => {
         editUser(+id, form);

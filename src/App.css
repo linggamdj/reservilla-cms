@@ -10,6 +10,11 @@ table {
     background-color: #fff;
 }
 
+td {
+    line-height: 2.5rem;
+    color: #3A3B3C;
+}
+
 .dropdown-menu .dropdown-custom:hover {
     color: #fff !important;
     background-color: #5CCBBD !important;

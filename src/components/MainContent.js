@@ -6,6 +6,8 @@ import {
     Villas,
     CreateVilla,
     EditVilla,
+    Galleries,
+    CreateGalleries,
     Locations,
     CreateLocation,
     EditLocation,
@@ -22,6 +24,16 @@ const MainContent = () => {
             <Routes>
                 <Route path="" element={<Dashboard></Dashboard>}></Route>
                 <Route path="villas/" element={<Villas></Villas>}></Route>
+                <Route path="villas/">
+                    <Route
+                        path=":VillaId/galleries"
+                        element={<Galleries></Galleries>}
+                    ></Route>
+                    <Route
+                        path=":VillaId/galleries/create"
+                        element={<CreateGalleries></CreateGalleries>}
+                    ></Route>
+                </Route>
                 <Route
                     path="villas/create"
                     element={<CreateVilla></CreateVilla>}
