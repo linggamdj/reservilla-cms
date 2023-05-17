@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { addGalleries } from "../../axios/galleryAxios";
 
 const CreateGalleries = () => {
+    const location = useLocation();
+
     const params = useParams();
     const { VillaId } = params;
 
@@ -21,9 +23,11 @@ const CreateGalleries = () => {
 
     useEffect(() => {
         if (isLoading) {
-            navigation(`/villas/${VillaId}/galleries`);
+            navigation(`/villas/${VillaId}/galleries`, {
+                state: { name: location.state.name },
+            });
         }
-    }, [VillaId, isLoading, navigation]);
+    }, [VillaId, isLoading, location.state.name, navigation]);
 
     return (
         <>

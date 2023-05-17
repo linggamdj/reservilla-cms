@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiFillDelete } from "react-icons/ai";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import EmptyRow from "../../helpers/EmptyRow";
 import { getGalleriesById, deleteGallery } from "../../axios/galleryAxios";
 import Pagination from "../../components/Pagination";
@@ -12,6 +12,8 @@ const Galleries = () => {
 
     const params = useParams();
     const { VillaId } = params;
+
+    const location = useLocation();
 
     useEffect(() => {
         getGalleriesById(VillaId, (result) => setGalleries(result));
@@ -35,11 +37,12 @@ const Galleries = () => {
                         textShadow: "2px 1px 5px rgba(192,192,192,0.5)",
                     }}
                 >
-                    Villa {VillaId}'s Galleries
+                    {location.state.name}'s Galleries
                 </h3>
                 <Link
                     className="btn btn-dark bg-main border-0 shadow-lg"
                     to={`/villas/${VillaId}/galleries/create`}
+                    state={{ name: location.state.name }}
                 >
                     Add
                 </Link>
