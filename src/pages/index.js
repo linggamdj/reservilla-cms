@@ -9,6 +9,10 @@ import Villas from "./villas/Villas";
 import CreateVilla from "./villas/CreateVilla";
 import EditVilla from "./villas/EditVilla";
 
+// Villa's Galleries
+import Galleries from "./galleries/Galleries";
+import CreateGalleries from "./galleries/CreateGalleries";
+
 // Locations
 import Locations from "./locations/Locations";
 import CreateLocation from "./locations/CreateLocation";
@@ -33,6 +37,8 @@ export {
     Villas,
     CreateVilla,
     EditVilla,
+    Galleries,
+    CreateGalleries,
     Locations,
     CreateLocation,
     EditLocation,
