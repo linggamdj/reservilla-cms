@@ -108,6 +108,7 @@ const Villas = () => {
                                             <td>
                                                 <Link
                                                     to={`/villas/${id}/galleries`}
+                                                    state={{ name }}
                                                 >
                                                     <FcGallery className="green-color me-2"></FcGallery>
                                                 </Link>
