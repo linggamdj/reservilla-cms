@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { getVillas } from "../../axios/villaAxios";
+import { getTransactions } from "../../axios/transactionAxios";
 import { MdOutlineVilla, MdDownloadDone } from "react-icons/md";
 import { AiOutlineTransaction } from "react-icons/ai";
 import { GiProgression } from "react-icons/gi";
 
 const Dashboard = () => {
     const [items, setItems] = useState([]);
+    const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
         getVillas((result) => setItems(result));
+        getTransactions((result) => setTransactions(result));
     }, []);
 
     return (
@@ -60,7 +63,7 @@ const Dashboard = () => {
                                         Transactions
                                     </div>
                                     <div className="h5 mb-0 text-secondary">
-                                        11
+                                        {transactions.length}
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +86,13 @@ const Dashboard = () => {
                                     <div className="row no-gutters align-items-center">
                                         <div className="col-auto">
                                             <div className="h5 mb-0 mr-3 text-secondary">
-                                                2
+                                                {
+                                                    transactions.filter(
+                                                        (transaction) =>
+                                                            transaction.status ===
+                                                            "pending"
+                                                    ).length
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -106,7 +115,13 @@ const Dashboard = () => {
                                         Success
                                     </div>
                                     <div className="h5 mb-0 text-secondary">
-                                        9
+                                        {
+                                            transactions.filter(
+                                                (transaction) =>
+                                                    transaction.status !==
+                                                    "pending"
+                                            ).length
+                                        }
                                     </div>
                                 </div>
                             </div>

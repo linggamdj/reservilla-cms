@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import EmptyRow from "../../helpers/EmptyRow";
 import { getTransactions } from "../../axios/transactionAxios";
-import { Link } from "react-router-dom";
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import Pagination from "../../components/Pagination";
+import { TransactionModal } from "../../components";
 
 const Transactions = () => {
     const [transactions, setTransactions] = useState([]);
@@ -57,7 +56,26 @@ const Transactions = () => {
                         <tbody className="align-middle">
                             {currentPosts.length > 0 ? (
                                 currentPosts.map((transaction, index) => {
-                                    const { id, User, status } = transaction;
+                                    const {
+                                        id,
+                                        User,
+                                        status,
+                                        booking_start_date,
+                                        booking_end_date,
+                                        payment,
+                                        payment_via,
+                                        Villa,
+                                    } = transaction;
+
+                                    const modalProps = {
+                                        id: id,
+                                        user: User,
+                                        bookStart: booking_start_date,
+                                        bookEnd: booking_end_date,
+                                        payment: payment,
+                                        via: payment_via,
+                                        villa: Villa,
+                                    };
 
                                     return (
                                         <tr key={id}>
@@ -70,7 +88,11 @@ const Transactions = () => {
                                                     .toUpperCase() +
                                                     status.slice(1)}
                                             </td>
-                                            <td>Detail</td>
+                                            <td>
+                                                <TransactionModal
+                                                    {...modalProps}
+                                                />
+                                            </td>
                                         </tr>
                                     );
                                 })
