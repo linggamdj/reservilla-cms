@@ -27,7 +27,7 @@ const Users = () => {
                 <h3
                     className="my-4 text-center"
                     style={{
-                        color: "#5CCBBD",
+                        color: "#4C9FC1",
                         textShadow: "2px 1px 5px rgba(192,192,192,0.5)",
                     }}
                 >
@@ -51,7 +51,7 @@ const Users = () => {
                 <section className="d-flex justify-content-center">
                     <table
                         className="table table-bordered text-center mt-2 shadow"
-                        style={{ borderColor: "#5CCBBD" }}
+                        style={{ borderColor: "#4C9FC1" }}
                     >
                         <thead>
                             <tr className="bg-main text-white">
@@ -73,7 +73,7 @@ const Users = () => {
                                             <td>{index + 1}</td>
                                             <td>{email}</td>
                                             <td>{name}</td>
-                                            <td>{phone}</td>
+                                            <td>0{phone}</td>
                                             <td>{role}</td>
                                         </tr>
                                     );

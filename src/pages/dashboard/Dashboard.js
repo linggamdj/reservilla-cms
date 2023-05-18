@@ -20,7 +20,7 @@ const Dashboard = () => {
                 <h1
                     className="h3 mb-0"
                     style={{
-                        color: "#5CCBBD",
+                        color: "#4C9FC1",
                         textShadow: "2px 1px 5px rgba(192,192,192,0.5)",
                     }}
                 >
@@ -51,11 +51,11 @@ const Dashboard = () => {
                 </div>
 
                 <div className="col-xl-3 col-md-6 mb-4">
-                    <div className="card border-left-success shadow h-100 py-2">
+                    <div className="card border-left-info shadow h-100 py-2">
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
-                                    <div className="fw-bold text-success text-uppercase mb-1">
+                                    <div className="fw-bold text-info text-uppercase mb-1">
                                         <AiOutlineTransaction
                                             size={20}
                                             className="mb-1 me-2"
@@ -103,11 +103,11 @@ const Dashboard = () => {
                 </div>
 
                 <div className="col-xl-3 col-md-6 mb-4">
-                    <div className="card border-left-info shadow h-100 py-2">
+                    <div className="card border-left-success shadow h-100 py-2">
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
-                                    <div className="fw-bold text-info text-uppercase mb-1">
+                                    <div className="fw-bold text-success text-uppercase mb-1">
                                         <MdDownloadDone
                                             size={20}
                                             className="mb-1 me-2"
