@@ -59,6 +59,7 @@ const Transactions = () => {
                                     const {
                                         id,
                                         User,
+                                        total_price,
                                         status,
                                         booking_start_date,
                                         booking_end_date,
@@ -70,6 +71,7 @@ const Transactions = () => {
                                     const modalProps = {
                                         id: id,
                                         user: User,
+                                        price: total_price,
                                         bookStart: booking_start_date,
                                         bookEnd: booking_end_date,
                                         payment: payment,
