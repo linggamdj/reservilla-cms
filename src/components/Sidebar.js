@@ -4,6 +4,7 @@ import { GoDashboard } from "react-icons/go";
 import { MdOutlineVilla, MdOutlineLocationOn } from "react-icons/md";
 import { AiOutlineTransaction } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
+import logo from "../assets/side-logo.png";
 
 const Sidebar = (props) => {
     return (
@@ -12,7 +13,12 @@ const Sidebar = (props) => {
                 <div className="header text-center">
                     <div className="list-item inline-block">
                         <Link className="navbar-brand h1" to="/">
-                            <h4 className="mb-1">Villa CMS</h4>
+                            {/* <h4 className="mb-1">Villa CMS</h4> */}
+                            <img
+                                src={logo}
+                                className="custom-image-side mb-1"
+                                alt="#"
+                            />
                         </Link>
                     </div>
                 </div>

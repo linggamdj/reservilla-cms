@@ -17,7 +17,7 @@ td {
 
 .dropdown-menu .dropdown-custom:hover {
     color: #fff !important;
-    background-color: #5CCBBD !important;
+    background-color: #4C9FC1 !important;
 }
 
 .dropdown-item:hover {
@@ -30,11 +30,11 @@ td {
 
 
 .main-text, .green-color {
-    color: #5CCBBD !important;
+    color: #4C9FC1 !important;
 }
 
 .main-color {
-    background-color: #5CCBBD !important;
+    background-color: #4C9FC1 !important;
 }
 
 .section-title > h2, .dark-color {
@@ -62,10 +62,15 @@ td {
     height: auto;
 }
 
+.custom-image-side {
+    max-width: 55%;
+    height: auto;
+}
+
 .section-login {
     height: 100vh;
     margin-bottom: 0 !important;
-    background: linear-gradient(#fafafa 50%, #5CCBBD 50%);
+    background: linear-gradient(#fafafa 50%, #4C9FC1 50%);
 }
 
 .section-login .container {
@@ -77,8 +82,8 @@ td {
 }
 
 .form-control:focus {
-    border-color: #5CCBBD !important;
-    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+    border-color: #4C9FC1 !important;
+    box-shadow: 0 0 0 0.2rem rgba(76, 159, 193, 0.25) !important;
 }
 
 .section-register, .section-login {
@@ -92,7 +97,7 @@ td {
 }
 
 .bg-main {
-    background-color: #5CCBBD !important;
+    background-color: #4C9FC1 !important;
 }
 
 .bg-custom {
@@ -120,7 +125,7 @@ a {
 }
 
 .sign-link {
-    color: #5CCBBD;
+    color: #4C9FC1;
 }
 
 .sign-link:hover {
@@ -136,8 +141,8 @@ a {
 }
 
 .pagination-border {
-    color: #5DB5AA !important;
-    border: 1px solid #5CCBBD !important;
+    color: #58B3D9 !important;
+    border: 1px solid #4C9FC1 !important;
 }
 
 .pagination button {
@@ -154,23 +159,23 @@ a {
 
 .pagination button.active {
     font-weight: 900;
-    background: #5CCBBD;
+    background: #4C9FC1;
     color: white;
-    border-color: #5CCBBD;
+    border-color: #4C9FC1;
 }
 
 /* Profiles */
-.social-list{
+.social-list {
     display:flex;
     list-style:none;
     justify-content:center;
     padding:0;
 }
 
-.social-list li{
-    padding:10px;
-    color:#8E24AA;
-    font-size:19px;
+.social-list li {
+    padding: 10px;
+    color: #8E24AA;
+    font-size: 19px;
 }
 
 /* Sidebar */
@@ -180,7 +185,7 @@ a {
 }
 
 .sidebar {
-    background-color: #5CCBBD;
+    background-color: #4C9FC1;
     width: 260px;
     padding: 24px;
     display: flex;
@@ -220,7 +225,7 @@ a {
 }
 
 .sidebar .main .list-item:hover {
-    background-color: #5DB5AA;
+    background-color: #58B3D9;
     transition: all ease-in .2s;
 }
 
@@ -230,7 +235,7 @@ a {
 
 /* Dashboard */
 .border-left-primary {
-    border-left: 5px solid #5CCBBD !important;
+    border-left: 5px solid #4C9FC1 !important;
 }
 
 .border-left-success {

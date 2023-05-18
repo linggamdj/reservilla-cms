@@ -38,7 +38,7 @@ const EditProfile = () => {
                 <h3
                     className="my-4 fw-semibold"
                     style={{
-                        color: "#5CCBBD",
+                        color: "#4C9FC1",
                         textShadow: "2px 1px 5px rgba(192,192,192,0.5)",
                     }}
                 >
