@@ -23,9 +23,11 @@ const CreateGalleries = () => {
 
     useEffect(() => {
         if (isLoading) {
-            navigation(`/villas/${VillaId}/galleries`, {
-                state: { name: location.state.name },
-            });
+            setTimeout(() => {
+                navigation(`/villas/${VillaId}/galleries`, {
+                    state: { name: location.state.name },
+                });
+            }, 1000);
         }
     }, [VillaId, isLoading, location.state.name, navigation]);
 

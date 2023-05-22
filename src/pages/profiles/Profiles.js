@@ -38,20 +38,16 @@ const Profiles = () => {
                             </div>
 
                             <div className="text-center mt-3">
-                                <Link
-                                    className="text-decoration-none"
-                                    to={`/users/edit/${id}`}
+                                <span
+                                    className={`${
+                                        user.role === "user"
+                                            ? "bg-secondary"
+                                            : "main-color"
+                                    } p-1 px-4 rounded text-white`}
                                 >
-                                    <span
-                                        className={`${
-                                            user.role === "user"
-                                                ? "bg-secondary"
-                                                : "main-color"
-                                        } p-1 px-4 rounded text-white`}
-                                    >
-                                        {user.role}
-                                    </span>
-                                </Link>
+                                    {user.role}
+                                </span>
+
                                 <h5 className="mt-2 mb-0">{user.name}</h5>
                                 <div className="d-flex justify-content-center px-2 mt-2">
                                     <Link to={`/users/${id}/edit`}>
