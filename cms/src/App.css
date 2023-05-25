@@ -17,7 +17,7 @@ td {
 
 .dropdown-menu .dropdown-custom:hover {
     color: #fff !important;
-    background-color: #4C9FC1 !important;
+    background-color: #E06F3E !important;
 }
 
 .dropdown-item:hover {
@@ -30,11 +30,11 @@ td {
 
 
 .main-text, .green-color {
-    color: #4C9FC1 !important;
+    color: #E06F3E !important;
 }
 
 .main-color {
-    background-color: #4C9FC1 !important;
+    background-color: #E06F3E !important;
 }
 
 .section-title > h2, .dark-color {
@@ -63,14 +63,14 @@ td {
 }
 
 .custom-image-side {
-    max-width: 55%;
+    max-width: 81%;
     height: auto;
 }
 
 .section-login {
     height: 100vh;
     margin-bottom: 0 !important;
-    background: linear-gradient(#fafafa 50%, #4C9FC1 50%);
+    background: linear-gradient(#fafafa 50%, #E06F3E 50%);
 }
 
 .section-login .container {
@@ -82,8 +82,8 @@ td {
 }
 
 .form-control:focus {
-    border-color: #4C9FC1 !important;
-    box-shadow: 0 0 0 0.2rem rgba(76, 159, 193, 0.25) !important;
+    border-color: #E06F3E !important;
+    box-shadow: 0 0 0 0.2rem rgba(224, 111, 62, 0.25) !important;
 }
 
 .section-register, .section-login {
@@ -97,7 +97,7 @@ td {
 }
 
 .bg-main {
-    background-color: #4C9FC1 !important;
+    background-color: #E06F3E !important;
 }
 
 .bg-custom {
@@ -125,7 +125,7 @@ a {
 }
 
 .sign-link {
-    color: #4C9FC1;
+    color: #E06F3E;
 }
 
 .sign-link:hover {
@@ -141,8 +141,8 @@ a {
 }
 
 .pagination-border {
-    color: #58B3D9 !important;
-    border: 1px solid #4C9FC1 !important;
+    color: #E06F3E !important;
+    border: 1px solid #E06F3E !important;
 }
 
 .pagination button {
@@ -159,9 +159,9 @@ a {
 
 .pagination button.active {
     font-weight: 900;
-    background: #4C9FC1;
+    background: #E06F3E;
     color: white;
-    border-color: #4C9FC1;
+    border-color: #E06F3E;
 }
 
 /* Profiles */
@@ -185,7 +185,7 @@ a {
 }
 
 .sidebar {
-    background-color: #4C9FC1;
+    background-color: #E06F3E;
     width: 260px;
     padding: 24px;
     display: flex;
@@ -225,7 +225,7 @@ a {
 }
 
 .sidebar .main .list-item:hover {
-    background-color: #58B3D9;
+    background-color: #E06F3E;
     transition: all ease-in .2s;
 }
 
@@ -235,7 +235,7 @@ a {
 
 /* Dashboard */
 .border-left-primary {
-    border-left: 5px solid #4C9FC1 !important;
+    border-left: 5px solid #E06F3E !important;
 }
 
 .border-left-success {

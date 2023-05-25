@@ -67,7 +67,7 @@ const EditVilla = () => {
                 <h3
                     className="my-4 fw-semibold"
                     style={{
-                        color: "#4C9FC1",
+                        color: "#E06F3E",
                         textShadow: "2px 1px 5px rgba(192,192,192,0.5)",
                     }}
                 >

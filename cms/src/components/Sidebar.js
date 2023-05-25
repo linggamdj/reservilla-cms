@@ -12,8 +12,7 @@ const Sidebar = (props) => {
             <div className="sidebar text-white shadow">
                 <div className="header text-center">
                     <div className="list-item inline-block">
-                        <Link className="navbar-brand h1" to="/">
-                            {/* <h4 className="mb-1">Villa CMS</h4> */}
+                        <Link to="/">
                             <img
                                 src={logo}
                                 className="custom-image-side mb-1"
