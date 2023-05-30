@@ -29,16 +29,6 @@ const Transactions = () => {
                 >
                     Transactions
                 </h3>
-                <div className="d-flex justify-content-between">
-                    <div className="md-form mt-0 w-25">
-                        <input
-                            className="form-control"
-                            type="text"
-                            placeholder="Search by Name"
-                            aria-label="Search"
-                        />
-                    </div>
-                </div>
                 <section className="d-flex justify-content-center">
                     <table
                         className="table table-bordered text-center mt-2 shadow"

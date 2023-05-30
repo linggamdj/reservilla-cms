@@ -14,7 +14,7 @@ const EditLocation = () => {
     const getBrand = () => {
         getLocationById(+id, (result) => {
             setForm({
-                name: result.name,
+                name: result.location,
             });
         });
     };
@@ -61,7 +61,7 @@ const EditLocation = () => {
                             onClick={() => submitHandler()}
                             className="btn btn-dark bg-main border-0 shadow-sm"
                         >
-                            Add
+                            Update
                         </button>
                     </div>
                 </div>

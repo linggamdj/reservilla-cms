@@ -37,7 +37,7 @@ const getLocationById = async (id, cb) => {
             },
         });
 
-        cb(result.data.data);
+        cb(result.data.data[0]);
     } catch (error) {
         Swal.fire({
             icon: "error",
