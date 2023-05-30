@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
+import { APP_URL } from "../helpers/Constants";
 
 const Navbar = (props) => {
     const { loginStatus, loginCbHandler } = props;
@@ -33,7 +34,7 @@ const Navbar = (props) => {
                                     src={
                                         localStorage.getItem("picture") !==
                                         "null"
-                                            ? `http://localhost:3000/${localStorage.getItem(
+                                            ? `${APP_URL}${localStorage.getItem(
                                                   "picture"
                                               )}`
                                             : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"

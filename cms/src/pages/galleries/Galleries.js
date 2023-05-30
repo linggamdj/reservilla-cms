@@ -3,6 +3,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link, useParams, useLocation } from "react-router-dom";
 import EmptyRow from "../../helpers/EmptyRow";
 import { getGalleriesById, deleteGallery } from "../../axios/galleryAxios";
+import { APP_URL } from "../../helpers/Constants";
 import Pagination from "../../components/Pagination";
 
 const Galleries = () => {
@@ -70,7 +71,7 @@ const Galleries = () => {
                                             <td>
                                                 {" "}
                                                 <img
-                                                    src={`http://localhost:3000/${image_name}`}
+                                                    src={`${APP_URL}${image_name}`}
                                                     width="300px"
                                                     className="img-thumbnail rounded"
                                                     alt="img"

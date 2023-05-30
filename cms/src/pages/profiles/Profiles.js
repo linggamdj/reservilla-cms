@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { BsFillGearFill } from "react-icons/bs";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { getUserById } from "../../axios/userAxios";
+import { APP_URL } from "../../helpers/Constants";
 
 const Profiles = () => {
     const [user, setUser] = useState({});
@@ -28,7 +29,7 @@ const Profiles = () => {
                                 <img
                                     src={
                                         user.profile_picture
-                                            ? `http://localhost:3000/${user.profile_picture}`
+                                            ? `${APP_URL}${user.profile_picture}`
                                             : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
                                     }
                                     width="100"
