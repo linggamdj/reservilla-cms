@@ -73,7 +73,9 @@ const TransactionModal = (props) => {
                                     {via.toUpperCase()}
                                 </div>
                                 <div className="card-text">
-                                    {payment.va_numbers[0].va_number}
+                                    {via === "permata"
+                                        ? payment.permata_va_number
+                                        : payment.va_numbers[0].va_number}
                                 </div>
                                 <div className="card-text">
                                     <MoneyFormat price={price} />

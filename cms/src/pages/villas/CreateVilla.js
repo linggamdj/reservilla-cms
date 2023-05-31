@@ -75,30 +75,38 @@ const CreateVilla = () => {
                 <div className="w-50 mx-auto">
                     <div className="mb-3">
                         <label>Name</label>
-                        <input
-                            onChange={(e) => {
-                                setForm({ ...form, name: e.target.value });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Name"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                onChange={(e) => {
+                                    setForm({ ...form, name: e.target.value });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Name"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Description</label>
-                        <textarea
-                            onChange={(e) => {
-                                setForm({
-                                    ...form,
-                                    description: e.target.value,
-                                });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Description"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={58}></Skeleton>
+                        ) : (
+                            <textarea
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        description: e.target.value,
+                                    });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Description"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Location</label>
@@ -116,39 +124,57 @@ const CreateVilla = () => {
                     </div>
                     <div className="mb-3">
                         <label>Price</label>
-                        <input
-                            onChange={(e) => {
-                                setForm({ ...form, price: +e.target.value });
-                            }}
-                            type="number"
-                            className="form-control"
-                            placeholder="Insert Price"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        price: +e.target.value,
+                                    });
+                                }}
+                                type="number"
+                                className="form-control"
+                                placeholder="Insert Price"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Map URL</label>
-                        <input
-                            onChange={(e) => {
-                                setForm({ ...form, map_url: e.target.value });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Map URL"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        map_url: e.target.value,
+                                    });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Map URL"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Phone</label>
-                        <input
-                            onChange={(e) => {
-                                setForm({ ...form, phone: e.target.value });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Phone"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                onChange={(e) => {
+                                    setForm({ ...form, phone: e.target.value });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Phone"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Swimming Pool</label>
@@ -169,27 +195,41 @@ const CreateVilla = () => {
                     </div>
                     <div className="mb-3">
                         <label>Bedroom</label>
-                        <input
-                            onChange={(e) => {
-                                setForm({ ...form, bedroom: +e.target.value });
-                            }}
-                            type="number"
-                            className="form-control"
-                            placeholder="Insert Bedroom"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        bedroom: +e.target.value,
+                                    });
+                                }}
+                                type="number"
+                                className="form-control"
+                                placeholder="Insert Bedroom"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Bathroom</label>
-                        <input
-                            onChange={(e) => {
-                                setForm({ ...form, bathroom: +e.target.value });
-                            }}
-                            type="number"
-                            className="form-control"
-                            placeholder="Insert Bathroom"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        bathroom: +e.target.value,
+                                    });
+                                }}
+                                type="number"
+                                className="form-control"
+                                placeholder="Insert Bathroom"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="my-4 text-center">
                         <button
