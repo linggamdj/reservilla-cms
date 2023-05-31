@@ -9,14 +9,22 @@ import MoneyFormat from "../../helpers/MoneyFormat";
 
 const Villas = () => {
     const [items, setItems] = useState([]);
+    const [isLoading, setLoading] = useState(false);
     const [query, setQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 5;
 
     useEffect(() => {
+        setLoading(true);
         query.length !== 0
-            ? searchVilla(query, (result) => setItems(result))
-            : getVillas((result) => setItems(result));
+            ? searchVilla(query, (result) => {
+                  setItems(result);
+                  setLoading(false);
+              })
+            : getVillas((result) => {
+                  setItems(result);
+                  setLoading(false);
+              });
     }, [query]);
 
     const lastPostIndex = currentPage * postsPerPage;
@@ -78,7 +86,7 @@ const Villas = () => {
                             </tr>
                         </thead>
                         <tbody className="align-middle">
-                            {currentPosts.length > 0 ? (
+                            {!isLoading ? (
                                 currentPosts.map((item, index) => {
                                     const {
                                         id,

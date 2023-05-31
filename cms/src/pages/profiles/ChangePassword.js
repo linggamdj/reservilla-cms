@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { editUser } from "../../axios/userAxios";
+import ReactLoading from "react-loading";
 
 const ChangePassword = () => {
     const [form, setForm] = useState({
         password: "",
         confirmPassword: "",
     });
+    const [isLoading, setLoading] = useState(false);
 
     const params = useParams();
     const { id } = params;
@@ -14,11 +16,18 @@ const ChangePassword = () => {
     const navigation = useNavigate();
 
     const submitHandler = () => {
+        setLoading(true);
         if (!(form.password && form.confirmPassword)) {
+            setLoading(false);
             return;
         } else {
-            editUser(+id, form);
-            navigation(`/users/${id}`);
+            editUser(+id, form).then(() => {
+                setLoading(false);
+
+                if (!isLoading) {
+                    navigation(`/users/${id}`);
+                }
+            });
         }
     };
 
@@ -67,9 +76,17 @@ const ChangePassword = () => {
                     <div className="mt-4 text-center">
                         <button
                             onClick={() => submitHandler()}
-                            className="btn btn-dark bg-main border-0 shadow-sm"
+                            className="update-btn btn btn-dark bg-main border-0 shadow-sm"
                         >
-                            Update
+                            {isLoading ? (
+                                <ReactLoading
+                                    type="bars"
+                                    width={30}
+                                    className="mx-auto"
+                                ></ReactLoading>
+                            ) : (
+                                "Update"
+                            )}
                         </button>
                     </div>
                 </div>

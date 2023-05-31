@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { addGalleries } from "../../axios/galleryAxios";
+import ReactLoading from "react-loading";
 
 const CreateGalleries = () => {
     const location = useLocation();
@@ -12,24 +13,24 @@ const CreateGalleries = () => {
         VillaId: +VillaId,
         "villa-pictures": {},
     });
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
     const navigation = useNavigate();
 
     const submitHandler = () => {
-        addGalleries(form);
-        setIsLoading(true);
-    };
+        setLoading(true);
+        addGalleries(form).then(() => {
+            setLoading(false);
 
-    useEffect(() => {
-        if (isLoading) {
-            setTimeout(() => {
+            if (!isLoading) {
                 navigation(`/villas/${VillaId}/galleries`, {
                     state: { name: location.state.name },
                 });
-            }, 1000);
-        }
-    }, [VillaId, isLoading, location.state.name, navigation]);
+            }
+        });
+    };
+
+    useEffect(() => {}, [VillaId, isLoading, location.state.name, navigation]);
 
     return (
         <>
@@ -64,9 +65,17 @@ const CreateGalleries = () => {
                     <div className="mt-4 text-center">
                         <button
                             onClick={() => submitHandler()}
-                            className="btn btn-dark bg-main border-0 shadow-sm"
+                            className="add-btn btn btn-dark bg-main border-0 shadow-sm"
                         >
-                            Add
+                            {isLoading ? (
+                                <ReactLoading
+                                    type="bars"
+                                    width={30}
+                                    className="mx-auto"
+                                ></ReactLoading>
+                            ) : (
+                                "Add"
+                            )}
                         </button>
                     </div>
                 </div>

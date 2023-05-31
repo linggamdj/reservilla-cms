@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { API_URL } from "../helpers/AxiosHelper";
 
 const URL = `${API_URL}/locations`;
+let isLoading = false;
 
 const getLocations = async (cb) => {
     try {
@@ -76,6 +77,7 @@ const addLocation = async (location) => {
 
 const editLocation = async (id, location) => {
     try {
+        isLoading = true;
         await axios({
             method: "PUT",
             url: `${URL}/update/${id}`,
@@ -83,9 +85,16 @@ const editLocation = async (id, location) => {
             headers: {
                 access_token: localStorage.getItem("access_token"),
             },
-        }).then(
-            Swal.fire("Edit Location ", "Location has been updated", "success")
-        );
+        }).then(() => {
+            isLoading = false;
+            if (!isLoading) {
+                Swal.fire(
+                    "Edit Location ",
+                    "Location has been updated",
+                    "success"
+                );
+            }
+        });
     } catch (error) {
         Swal.fire({
             icon: "error",

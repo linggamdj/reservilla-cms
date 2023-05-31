@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { API_URL } from "../helpers/AxiosHelper";
 
 const URL = `${API_URL}/villas`;
+let isLoading = false;
 
 const getVillas = async (cb) => {
     try {
@@ -75,6 +76,7 @@ const searchVilla = async (query, cb) => {
 
 const addVilla = async (villa) => {
     try {
+        isLoading = true;
         await axios({
             method: "POST",
             url: `${URL}/add`,
@@ -82,7 +84,12 @@ const addVilla = async (villa) => {
             headers: {
                 access_token: localStorage.getItem("access_token"),
             },
-        }).then(Swal.fire("Add Villa", "Villa has been added", "success"));
+        }).then(() => {
+            isLoading = false;
+            if (!isLoading) {
+                Swal.fire("Add Villa", "Villa has been added", "success");
+            }
+        });
     } catch (error) {
         Swal.fire({
             icon: "error",
@@ -97,6 +104,8 @@ const addVilla = async (villa) => {
 
 const editVilla = async (id, villa) => {
     try {
+        isLoading = true;
+
         await axios({
             method: "PUT",
             url: `${URL}/update/${id}`,
@@ -104,7 +113,13 @@ const editVilla = async (id, villa) => {
             headers: {
                 access_token: localStorage.getItem("access_token"),
             },
-        }).then(Swal.fire("Edit Villa ", "Villa has been updated", "success"));
+        }).then(() => {
+            isLoading = false;
+
+            if (!isLoading) {
+                Swal.fire("Edit Villa ", "Villa has been updated", "success");
+            }
+        });
     } catch (error) {
         Swal.fire({
             icon: "error",

@@ -1,31 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getLocationById, editLocation } from "../../axios/locationAxios";
+import ReactLoading from "react-loading";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const EditLocation = () => {
     const [form, setForm] = useState({
         name: "",
     });
+    const [isLoading, setLoading] = useState(false);
 
     const navigation = useNavigate();
     const params = useParams();
     const { id } = params;
 
-    const getBrand = () => {
+    useEffect(() => {
+        setLoading(true);
         getLocationById(+id, (result) => {
             setForm({
                 name: result.location,
             });
+            setLoading(false);
         });
-    };
-
-    useEffect(() => {
-        getBrand();
     }, []);
 
     const submitHandler = () => {
-        editLocation(+id, form);
-        navigation("/locations");
+        setLoading(true);
+        editLocation(+id, form).then(() => {
+            setLoading(false);
+
+            if (!isLoading) {
+                navigation("/locations");
+            }
+        });
     };
 
     return (
@@ -45,23 +53,35 @@ const EditLocation = () => {
                 <div className="w-50 mx-auto">
                     <div className="mb-3">
                         <label>Name</label>
-                        <input
-                            value={form.name}
-                            onChange={(e) => {
-                                setForm({ ...form, name: e.target.value });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Name"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={form.name}
+                                onChange={(e) => {
+                                    setForm({ ...form, name: e.target.value });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Name"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mt-4 text-center">
                         <button
                             onClick={() => submitHandler()}
-                            className="btn btn-dark bg-main border-0 shadow-sm"
+                            className="update-btn btn btn-dark bg-main border-0 shadow-sm"
                         >
-                            Update
+                            {isLoading ? (
+                                <ReactLoading
+                                    type="bars"
+                                    width={30}
+                                    className="mx-auto"
+                                ></ReactLoading>
+                            ) : (
+                                "Update"
+                            )}
                         </button>
                     </div>
                 </div>

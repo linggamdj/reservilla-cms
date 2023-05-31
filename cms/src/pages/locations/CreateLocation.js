@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addLocation } from "../../axios/locationAxios";
+import ReactLoading from "react-loading";
 
 const CreateLocation = () => {
     const [form, setForm] = useState({
         name: "",
     });
+    const [isLoading, setLoading] = useState(false);
 
     const navigation = useNavigate();
 
     const submitHandler = () => {
-        addLocation(form);
-        navigation("/locations");
+        setLoading(true);
+        addLocation(form).then(() => {
+            setLoading(false);
+
+            if (!isLoading) {
+                navigation("/locations");
+            }
+        });
     };
 
     return (
@@ -44,9 +52,17 @@ const CreateLocation = () => {
                     <div className="mt-4 text-center">
                         <button
                             onClick={() => submitHandler()}
-                            className="btn btn-dark bg-main border-0 shadow-sm"
+                            className="add-btn btn btn-dark bg-main border-0 shadow-sm"
                         >
-                            Add
+                            {isLoading ? (
+                                <ReactLoading
+                                    type="bars"
+                                    width={30}
+                                    className="mx-auto"
+                                ></ReactLoading>
+                            ) : (
+                                "Add"
+                            )}
                         </button>
                     </div>
                 </div>

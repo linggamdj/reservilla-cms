@@ -75,10 +75,13 @@ const Transactions = () => {
                                             <td>{id}</td>
                                             <td>{User.name}</td>
                                             <td>
-                                                {status
-                                                    .charAt(0)
-                                                    .toUpperCase() +
-                                                    status.slice(1)}
+                                                {" "}
+                                                {status === "pending"
+                                                    ? status
+                                                          .charAt(0)
+                                                          .toUpperCase() +
+                                                      status.slice(1)
+                                                    : "Success"}
                                             </td>
                                             <td>
                                                 <TransactionModal

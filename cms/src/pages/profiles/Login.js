@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaUserAlt, FaKey } from "react-icons/fa";
 import logo from "../../assets/hi-logo.png";
 import { login } from "../../axios/userAxios";
+import ReactLoading from "react-loading";
 
 const Login = (props) => {
     const { loginCbHandler, isLoginHandler } = props;
@@ -11,12 +12,19 @@ const Login = (props) => {
         email: "",
         password: "",
     });
+    const [isLoading, setLoading] = useState(false);
 
     const navigation = useNavigate();
 
     const submitHandler = () => {
-        login(form, loginCbHandler);
-        navigation("/");
+        setLoading(true);
+        login(form, loginCbHandler).then(() => {
+            setLoading(false);
+        });
+
+        if (!isLoading) {
+            navigation("/");
+        }
     };
 
     const registerHandler = () => {
@@ -93,12 +101,23 @@ const Login = (props) => {
                                 </div>
 
                                 <div className="d-flex justify-content-center pt-2 mb-2">
-                                    <input
-                                        onClick={() => submitHandler()}
-                                        className="btn text-white main-color btn-lg"
-                                        type="submit"
-                                        value="Login"
-                                    />
+                                    {!isLoading ? (
+                                        <input
+                                            onClick={() => submitHandler()}
+                                            className="login-btn btn text-white main-color btn-lg"
+                                            type="submit"
+                                            value="Login"
+                                        />
+                                    ) : (
+                                        <div className="login-btn btn main-color btn-lg">
+                                            <ReactLoading
+                                                type="bars"
+                                                height={35}
+                                                width={35}
+                                                className="mx-auto"
+                                            ></ReactLoading>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="d-flex justify-content-center mt-2">

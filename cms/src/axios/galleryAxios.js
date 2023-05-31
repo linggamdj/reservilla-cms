@@ -4,6 +4,7 @@ import FormData from "form-data";
 import { API_URL } from "../helpers/AxiosHelper";
 
 const URL = `${API_URL}/villaGaleries`;
+let isLoading = false;
 
 const getGalleriesById = async (id, cb) => {
     try {
@@ -29,6 +30,8 @@ const getGalleriesById = async (id, cb) => {
 };
 
 const addGalleries = async (galleries) => {
+    isLoading = true;
+
     let data = new FormData();
 
     data.append("VillaId", galleries.VillaId);
@@ -36,8 +39,6 @@ const addGalleries = async (galleries) => {
     for (let i = 0; i < galleries["villa-pictures"].length; i++) {
         data.append(`villa-pictures`, galleries["villa-pictures"][i]);
     }
-
-    console.log(data);
 
     try {
         await axios({
@@ -48,9 +49,17 @@ const addGalleries = async (galleries) => {
                 "Content-Type": "multipart/form-data",
                 access_token: localStorage.getItem("access_token"),
             },
-        });
+        }).then(() => {
+            isLoading = false;
 
-        Swal.fire("Add Galleries", "Galleries has been added.", "success");
+            if (!isLoading) {
+                Swal.fire(
+                    "Add Galleries",
+                    "Galleries has been added.",
+                    "success"
+                );
+            }
+        });
     } catch (error) {
         Swal.fire({
             icon: "error",

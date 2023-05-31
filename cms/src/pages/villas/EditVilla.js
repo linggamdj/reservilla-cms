@@ -3,6 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
 import { getVillaById, editVilla } from "../../axios/villaAxios";
 import { getLocations } from "../../axios/locationAxios";
+import ReactLoading from "react-loading";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const EditVilla = () => {
     const [form, setForm] = useState({
@@ -16,6 +19,7 @@ const EditVilla = () => {
         swimming_pool: false,
         LocationId: "",
     });
+    const [isLoading, setLoading] = useState(false);
 
     const navigation = useNavigate();
     const params = useParams();
@@ -31,6 +35,7 @@ const EditVilla = () => {
     ];
 
     useEffect(() => {
+        setLoading(true);
         getLocations((result) => setLocations(result));
         getVillaById(+id, (result) => {
             setForm({
@@ -44,6 +49,7 @@ const EditVilla = () => {
                 swimming_pool: result.swimming_pool,
                 LocationId: result.LocationId,
             });
+            setLoading(false);
         });
     }, []);
 
@@ -57,8 +63,13 @@ const EditVilla = () => {
     });
 
     const submitHandler = () => {
-        editVilla(+id, form);
-        navigation("/villas");
+        setLoading(true);
+        editVilla(+id, form).then(() => {
+            setLoading(false);
+            if (!isLoading) {
+                navigation("/villas");
+            }
+        });
     };
 
     return (
@@ -78,126 +89,185 @@ const EditVilla = () => {
                 <div className="w-50 mx-auto">
                     <div className="mb-3">
                         <label>Name</label>
-                        <input
-                            value={form.name}
-                            onChange={(e) => {
-                                setForm({ ...form, name: e.target.value });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Name"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={form.name}
+                                onChange={(e) => {
+                                    setForm({ ...form, name: e.target.value });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Name"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Description</label>
-                        <textarea
-                            value={form.description}
-                            onChange={(e) => {
-                                setForm({
-                                    ...form,
-                                    description: e.target.value,
-                                });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Description"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={58}></Skeleton>
+                        ) : (
+                            <textarea
+                                value={form.description}
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        description: e.target.value,
+                                    });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Description"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Location</label>
-                        <Select
-                            placeholder={"Don't Re-select"}
-                            options={locationOptions}
-                            onChange={(e) => {
-                                setForm({ ...form, LocationId: +e.value });
-                            }}
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <Select
+                                placeholder={"Don't Re-select"}
+                                options={locationOptions}
+                                onChange={(e) => {
+                                    setForm({ ...form, LocationId: +e.value });
+                                }}
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Price</label>
-                        <input
-                            value={form.price}
-                            onChange={(e) => {
-                                setForm({ ...form, price: +e.target.value });
-                            }}
-                            type="number"
-                            className="form-control"
-                            placeholder="Insert Price"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={form.price}
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        price: +e.target.value,
+                                    });
+                                }}
+                                type="number"
+                                className="form-control"
+                                placeholder="Insert Price"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Map URL</label>
-                        <input
-                            value={form.map_url}
-                            onChange={(e) => {
-                                setForm({ ...form, map_url: e.target.value });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Map URL"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={form.map_url}
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        map_url: e.target.value,
+                                    });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Map URL"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Phone</label>
-                        <input
-                            value={+form.phone}
-                            onChange={(e) => {
-                                setForm({ ...form, phone: e.target.value });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Phone"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={+form.phone}
+                                onChange={(e) => {
+                                    setForm({ ...form, phone: e.target.value });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Phone"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Swimming Pool</label>
-                        <Select
-                            placeholder={"Don't Re-select"}
-                            options={swimmingOptions}
-                            onChange={(e) => {
-                                setForm({ ...form, swimming_pool: +e.value });
-                            }}
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <Select
+                                placeholder={"Don't Re-select"}
+                                options={swimmingOptions}
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        swimming_pool: +e.value,
+                                    });
+                                }}
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Bedroom</label>
-                        <input
-                            value={form.bedroom}
-                            onChange={(e) => {
-                                setForm({ ...form, bedroom: +e.target.value });
-                            }}
-                            type="number"
-                            className="form-control"
-                            placeholder="Insert Bedroom"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={form.bedroom}
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        bedroom: +e.target.value,
+                                    });
+                                }}
+                                type="number"
+                                className="form-control"
+                                placeholder="Insert Bedroom"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Bathroom</label>
-                        <input
-                            value={form.bathroom}
-                            onChange={(e) => {
-                                setForm({ ...form, bathroom: +e.target.value });
-                            }}
-                            type="number"
-                            className="form-control"
-                            placeholder="Insert Bathroom"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={form.bathroom}
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        bathroom: +e.target.value,
+                                    });
+                                }}
+                                type="number"
+                                className="form-control"
+                                placeholder="Insert Bathroom"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="my-4 text-center">
                         <button
                             onClick={() => submitHandler()}
-                            className="btn btn-dark bg-main border-0 shadow-sm"
+                            className="update-btn btn btn-dark bg-main border-0 shadow-sm"
                         >
-                            Update
+                            {isLoading ? (
+                                <ReactLoading
+                                    type="bars"
+                                    width={30}
+                                    className="mx-auto"
+                                ></ReactLoading>
+                            ) : (
+                                "Update"
+                            )}
                         </button>
                     </div>
                 </div>

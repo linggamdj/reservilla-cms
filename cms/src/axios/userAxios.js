@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { API_URL } from "../helpers/AxiosHelper";
 
 const URL = `${API_URL}/admins`;
+let isLoading = false;
 
 const getUsers = async (cb) => {
     try {
@@ -98,6 +99,8 @@ const detail = async (id, cb) => {
 
 const editUser = async (id, user) => {
     try {
+        isLoading = true;
+
         await axios({
             method: "PUT",
             url: `${URL}/update/${id}`,
@@ -106,13 +109,19 @@ const editUser = async (id, user) => {
                 "Content-Type": "multipart/form-data",
                 access_token: localStorage.getItem("access_token"),
             },
-        });
+        }).then(() => {
+            isLoading = false;
 
-        Swal.fire("Edit User ", "User has been updated", "success").then(
-            async (result) => {
-                window.location.reload();
+            if (!isLoading) {
+                Swal.fire(
+                    "Edit User ",
+                    "User has been updated",
+                    "success"
+                ).then(() => {
+                    window.location.reload();
+                });
             }
-        );
+        });
     } catch (error) {
         Swal.fire({
             icon: "error",
@@ -138,7 +147,7 @@ const deleteUser = async (id) => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const userId = localStorage.getItem("user_id");
-                let result = await axios({
+                await axios({
                     method: "DELETE",
                     url: `${URL}/delete/${id}`,
                     headers: {
@@ -146,7 +155,6 @@ const deleteUser = async (id) => {
                     },
                 });
 
-                console.log(result);
                 Swal.fire("Delete User", "User has been deleted", "Success");
                 if (id !== userId) {
                     window.location.reload();

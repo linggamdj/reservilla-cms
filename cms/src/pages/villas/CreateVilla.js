@@ -3,6 +3,9 @@ import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { addVilla } from "../../axios/villaAxios";
 import { getLocations } from "../../axios/locationAxios";
+import ReactLoading from "react-loading";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const CreateVilla = () => {
     const [form, setForm] = useState({
@@ -16,6 +19,7 @@ const CreateVilla = () => {
         swimming_pool: false,
         LocationId: "",
     });
+    const [isLoading, setLoading] = useState(false);
 
     let [locations, setLocations] = useState();
     let locationOptions = [];
@@ -28,7 +32,11 @@ const CreateVilla = () => {
     const navigation = useNavigate();
 
     useEffect(() => {
-        getLocations((result) => setLocations(result));
+        setLoading(true);
+        getLocations((result) => {
+            setLocations(result);
+            setLoading(false);
+        });
     }, []);
 
     locations?.map((location) => {
@@ -41,8 +49,13 @@ const CreateVilla = () => {
     });
 
     const submitHandler = () => {
-        addVilla(form);
-        navigation("/villas");
+        setLoading(true);
+        addVilla(form).then(() => {
+            setLoading(false);
+            if (!isLoading) {
+                navigation("/villas");
+            }
+        });
     };
 
     return (
@@ -89,13 +102,17 @@ const CreateVilla = () => {
                     </div>
                     <div className="mb-3">
                         <label>Location</label>
-                        <Select
-                            options={locationOptions}
-                            onChange={(e) => {
-                                setForm({ ...form, LocationId: +e.value });
-                            }}
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <Select
+                                options={locationOptions}
+                                onChange={(e) => {
+                                    setForm({ ...form, LocationId: +e.value });
+                                }}
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Price</label>
@@ -135,13 +152,20 @@ const CreateVilla = () => {
                     </div>
                     <div className="mb-3">
                         <label>Swimming Pool</label>
-                        <Select
-                            options={swimmingOptions}
-                            onChange={(e) => {
-                                setForm({ ...form, swimming_pool: +e.value });
-                            }}
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <Select
+                                options={swimmingOptions}
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        swimming_pool: +e.value,
+                                    });
+                                }}
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Bedroom</label>
@@ -170,9 +194,17 @@ const CreateVilla = () => {
                     <div className="my-4 text-center">
                         <button
                             onClick={() => submitHandler()}
-                            className="btn btn-dark bg-main border-0 shadow-sm"
+                            className="add-btn btn btn-dark bg-main border-0 shadow-sm"
                         >
-                            Add
+                            {isLoading ? (
+                                <ReactLoading
+                                    type="bars"
+                                    width={30}
+                                    className="mx-auto"
+                                ></ReactLoading>
+                            ) : (
+                                "Add"
+                            )}
                         </button>
                     </div>
                 </div>

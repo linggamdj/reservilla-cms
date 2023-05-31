@@ -5,6 +5,7 @@ import { BsFillPhoneFill } from "react-icons/bs";
 import { FaUserAlt, FaKey, FaLock } from "react-icons/fa";
 import logo from "../../assets/hi-logo.png";
 import { register } from "../../axios/userAxios";
+import ReactLoading from "react-loading";
 
 const Register = (props) => {
     const { isLoginHandler } = props;
@@ -16,9 +17,12 @@ const Register = (props) => {
         password: "",
         confirmPassword: "",
     });
+    const [isLoading, setLoading] = useState(false);
 
     const submitHandler = () => {
-        register(form, isLoginHandler);
+        setLoading(true);
+
+        register(form, isLoginHandler).then(() => setLoading(false));
     };
 
     const loginHandler = () => {
@@ -169,12 +173,23 @@ const Register = (props) => {
                                 </div>
 
                                 <div className="d-flex justify-content-center pt-2 mb-2">
-                                    <input
-                                        onClick={() => submitHandler()}
-                                        className="btn text-white main-color btn-lg"
-                                        type="submit"
-                                        value="Register"
-                                    />
+                                    {!isLoading ? (
+                                        <input
+                                            onClick={() => submitHandler()}
+                                            className="register-btn btn text-white main-color btn-lg"
+                                            type="submit"
+                                            value="Register"
+                                        />
+                                    ) : (
+                                        <div className="register-btn login-btn btn main-color btn-lg">
+                                            <ReactLoading
+                                                type="bars"
+                                                height={35}
+                                                width={35}
+                                                className="mx-auto"
+                                            ></ReactLoading>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="d-flex justify-content-center mt-2">

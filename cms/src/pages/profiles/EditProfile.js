@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getUserById, editUser } from "../../axios/userAxios";
 import { useNavigate, useParams } from "react-router-dom";
+import ReactLoading from "react-loading";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const EditProfile = () => {
     const [form, setForm] = useState({
@@ -9,6 +12,7 @@ const EditProfile = () => {
         name: "",
         "profile-picture": "",
     });
+    const [isLoading, setLoading] = useState(false);
 
     const params = useParams();
     const { id } = params;
@@ -16,6 +20,7 @@ const EditProfile = () => {
     const navigation = useNavigate();
 
     useEffect(() => {
+        setLoading(true);
         getUserById(+id, (result) => {
             setForm({
                 email: result.email,
@@ -24,12 +29,20 @@ const EditProfile = () => {
                 password: result.password,
                 "profile-picture": result.profile_picture,
             });
+            setLoading(false);
         });
     }, [id]);
 
     const submitHandler = () => {
-        editUser(+id, form);
-        navigation(`/users/${id}`);
+        setLoading(true);
+
+        editUser(+id, form).then(() => {
+            setLoading(false);
+
+            if (!isLoading) {
+                navigation(`/users/${id}`);
+            }
+        });
     };
 
     return (
@@ -49,63 +62,87 @@ const EditProfile = () => {
                 <div className="w-50 mx-auto">
                     <div className="mb-3">
                         <label>Name</label>
-                        <input
-                            value={form.name}
-                            onChange={(e) => {
-                                setForm({ ...form, name: e.target.value });
-                            }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Insert Name"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={form.name}
+                                onChange={(e) => {
+                                    setForm({ ...form, name: e.target.value });
+                                }}
+                                type="text"
+                                className="form-control"
+                                placeholder="Insert Name"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>E-mail</label>
-                        <input
-                            value={form.email}
-                            onChange={(e) => {
-                                setForm({ ...form, email: e.target.value });
-                            }}
-                            type="email"
-                            className="form-control"
-                            placeholder="Insert E-mail"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={form.email}
+                                onChange={(e) => {
+                                    setForm({ ...form, email: e.target.value });
+                                }}
+                                type="email"
+                                className="form-control"
+                                placeholder="Insert E-mail"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Phone</label>
-                        <input
-                            value={form.phone}
-                            onChange={(e) => {
-                                setForm({ ...form, phone: e.target.value });
-                            }}
-                            type="email"
-                            className="form-control"
-                            placeholder="Insert Phone"
-                            required
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                value={form.phone}
+                                onChange={(e) => {
+                                    setForm({ ...form, phone: e.target.value });
+                                }}
+                                type="email"
+                                className="form-control"
+                                placeholder="Insert Phone"
+                                required
+                            />
+                        )}
                     </div>
                     <div className="mb-3">
                         <label>Profile Image</label>
-                        <input
-                            placeholder={form.profile_picture}
-                            onChange={(e) => {
-                                setForm({
-                                    ...form,
-                                    "profile-picture": e.target.files[0],
-                                });
-                            }}
-                            type="file"
-                            className="form-control"
-                        />
+                        {isLoading ? (
+                            <Skeleton height={34}></Skeleton>
+                        ) : (
+                            <input
+                                placeholder={form.profile_picture}
+                                onChange={(e) => {
+                                    setForm({
+                                        ...form,
+                                        "profile-picture": e.target.files[0],
+                                    });
+                                }}
+                                type="file"
+                                className="form-control"
+                            />
+                        )}
                     </div>
                     <div className="mt-4 text-center">
                         <button
                             onClick={() => submitHandler()}
-                            className="btn btn-dark bg-main border-0 shadow-sm"
+                            className="update-btn btn btn-dark bg-main border-0 shadow-sm"
                         >
-                            Update
+                            {isLoading ? (
+                                <ReactLoading
+                                    type="bars"
+                                    width={30}
+                                    className="mx-auto"
+                                ></ReactLoading>
+                            ) : (
+                                "Update"
+                            )}
                         </button>
                     </div>
                 </div>

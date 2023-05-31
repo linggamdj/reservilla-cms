@@ -1,4 +1,5 @@
 import React from "react";
+import ReactLoading from "react-loading";
 
 const EmptyRow = (props) => {
     return (
@@ -7,7 +8,13 @@ const EmptyRow = (props) => {
                 className="text-center fw-semibold green-color"
                 colSpan={props.col}
             >
-                {props.name} are empty! Insert some data.
+                <ReactLoading
+                    type="bars"
+                    width={100}
+                    height={100}
+                    color="orange"
+                    className="mx-auto"
+                ></ReactLoading>
             </td>
         </tr>
     );

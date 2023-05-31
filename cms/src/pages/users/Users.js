@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
 import EmptyRow from "../../helpers/EmptyRow";
 import { searchUser, getUsers } from "../../axios/userAxios";
 import Pagination from "../../components/Pagination";
 
 const Users = () => {
-    const userId = localStorage.getItem("user_id");
     const [users, setUsers] = useState([]);
+    const [isLoading, setLoading] = useState(false);
     const [query, setQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 5;
 
     useEffect(() => {
+        setLoading(true);
         query.length !== 0
-            ? searchUser(query, (result) => setUsers(result))
-            : getUsers((result) => setUsers(result));
+            ? searchUser(query, (result) => {
+                  setUsers(result);
+                  setLoading(false);
+              })
+            : getUsers((result) => {
+                  setUsers(result);
+                  setLoading(false);
+              });
     }, [query]);
 
     const lastPostIndex = currentPage * postsPerPage;
@@ -63,7 +69,7 @@ const Users = () => {
                             </tr>
                         </thead>
                         <tbody className="align-middle">
-                            {currentPosts.length > 0 ? (
+                            {!isLoading ? (
                                 currentPosts.map((user, index) => {
                                     const { id, email, name, phone, role } =
                                         user;
@@ -73,7 +79,7 @@ const Users = () => {
                                             <td>{index + 1}</td>
                                             <td>{email}</td>
                                             <td>{name}</td>
-                                            <td>0{phone}</td>
+                                            <td>+62{phone}</td>
                                             <td>{role}</td>
                                         </tr>
                                     );
